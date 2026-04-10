@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../screens/products_screen.dart';
 import '../screens/Favorite_screen.dart';
 import '../screens/home_screen.dart';
 import '../widgets/outfit_widget.dart';
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
   // Lista de pantallas para navegar
-  final List<Widget> _pages = [ HomeScreen(), Favorite_Screen() ];
+  final List<Widget> _pages = [ HomeScreen(), Favorite_Screen(),ProductsScreen()];
 
   @override
   void dispose() {

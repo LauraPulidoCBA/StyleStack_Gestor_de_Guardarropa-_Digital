@@ -44,62 +44,9 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // SUGERENCIAS
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "Sugerencias de Temporada",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            
 
-            SizedBox(
-              height: 160,
-              child: wardrobe.isLoadingApi
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: wardrobe.apiSuggestions.length,
-                      itemBuilder: (context, index) {
-                        final suggestion =
-                            wardrobe.apiSuggestions[index];
-
-                        return Container(
-                          width: 120,
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    suggestion['image'] ?? '',
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        const Icon(Icons.error,
-                                            color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                suggestion['title'] ?? 'Sin nombre',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-            ),
+            
 
             //  MI GUARDARROPA
             const Padding(

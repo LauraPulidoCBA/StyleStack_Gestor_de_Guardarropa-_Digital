@@ -2,7 +2,7 @@ class Clothing {
   String id;
   String name;
   String category;
-  String image; // Para guardar la ruta del archivo de la foto
+  String image;
   bool isFavorite;
 
   Clothing({
@@ -22,12 +22,11 @@ class Clothing {
       'isFavorite': isFavorite,
     };
 
-    // Para cargar de SharedPreferences
   factory Clothing.fromMap(Map<String, dynamic> map) => Clothing(
       id: map['id'],
       name: map['name'],
       category: map['category'],
-      image: map['image'],
+      image: map['images'],
       isFavorite: map['isFavorite'] ?? false,
      );
   }
