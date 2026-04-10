@@ -9,10 +9,13 @@ class ClothingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 4,
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: ListTile(
-        title: Text(item.name),
+        leading: Icon(Icons.checkroom, color: Colors.blueAccent),
+        title: Text(item.name, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(item.category),
-        trailing: Icon(Icons.favorite),
+        trailing: Icon(Icons.favorite, color: item.isFavorite ? Colors.red : Colors.grey),
       ),
     );
   }

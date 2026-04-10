@@ -18,8 +18,13 @@ class AddClothingScreen extends StatelessWidget {
               controller: nameController,
               decoration: InputDecoration(labelText: "Nombre"),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
               onPressed: () {
                 final nueva = Clothing(
                   name: nameController.text,
