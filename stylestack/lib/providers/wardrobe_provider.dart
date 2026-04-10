@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,14 +8,17 @@ import '../models/clothing.dart';
 import '../services/api_service.dart';
 
 class WardrobeProvider with ChangeNotifier {
+  /// Cuántas prendas distintas muestra la sugerencia al azar (sacudida).
+  static const int suggestedOutfitPieceCount = 4;
+
   List<Clothing> _clothes = [];
   List<dynamic> _apiSuggestions = []; // Nueva lista para la API
-  Clothing? _suggestedOutfit;
+  List<Clothing> _suggestedOutfitItems = [];
   bool _isLoadingApi = false;
 
   List<Clothing> get clothes => _clothes;
   List<dynamic> get apiSuggestions => _apiSuggestions;
-  Clothing? get suggestedOutfit => _suggestedOutfit;
+  List<Clothing> get suggestedOutfitItems => List.unmodifiable(_suggestedOutfitItems);
   bool get isLoadingApi => _isLoadingApi;
 
   WardrobeProvider() {
@@ -83,10 +85,19 @@ class WardrobeProvider with ChangeNotifier {
   }
 
   void _randomizeOutfit() {
-    if (_clothes.isNotEmpty) {
-      _suggestedOutfit = _clothes[Random().nextInt(_clothes.length)];
-      notifyListeners();
+    if (_clothes.isEmpty) return;
+    final shuffled = List<Clothing>.from(_clothes)..shuffle(Random());
+    final usedCategories = <String>{};
+    final picked = <Clothing>[];
+    for (final item in shuffled) {
+      final key = item.category.trim().toLowerCase();
+      if (usedCategories.contains(key)) continue;
+      usedCategories.add(key);
+      picked.add(item);
+      if (picked.length >= suggestedOutfitPieceCount) break;
     }
+    _suggestedOutfitItems = picked;
+    notifyListeners();
   }
 
   // Persistencia
