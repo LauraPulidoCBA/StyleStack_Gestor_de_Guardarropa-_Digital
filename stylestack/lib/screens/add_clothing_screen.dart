@@ -30,19 +30,7 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
     }
   }
 
-  void _saveClothing() {
-    if (_nameController.text.isEmpty || _image == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Completa los campos")),
-      );
-      return;
-    }
-
-    // --- TRUCO PARA EL ID SIN UUID --
-
-   
-    Navigator.pop(context);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -117,14 +105,18 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-                onPressed: () => context.read<WardrobeProvider>().addClothing(
+                onPressed: () {context.read<WardrobeProvider>().addClothing(
                   image: _image!.path,
                   name: _nameController.text,
                   category: _selectedCategory
-                ),
+                 
+                ); Navigator.pop(context);
+                },
                 child: const Text("GUARDAR", style: TextStyle(color: Colors.white)),
               ),
             ),
+
+    
           ],
         ),
       ),

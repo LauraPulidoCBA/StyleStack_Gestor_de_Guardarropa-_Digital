@@ -21,8 +21,7 @@ class WardrobeProvider with ChangeNotifier {
 
   WardrobeProvider() {
     _loadFromDisk();
-    _initShakeDetection(); // Iniciar el Huevo de Pascua
-    //fetchSuggestions(); // Carga la API al iniciar
+    _initShakeDetection();
   }
   List<Clothing> get favorites => _clothes.where((c) => c.isFavorite).toList();
 
@@ -32,7 +31,7 @@ class WardrobeProvider with ChangeNotifier {
     notifyListeners();
 
     try {
-      _apiSuggestions = await ApiService().getSuggestions();
+      _apiSuggestions = await ProductService().getProductos();
       print("SUGERENCIAS: $_apiSuggestions");
     } catch (e) {
       print("Error provider: $e");
@@ -68,13 +67,12 @@ class WardrobeProvider with ChangeNotifier {
   void toggleFavorite(Clothing item) async {
     item.isFavorite = !item.isFavorite;
     if (await Vibration.hasVibrator() ?? false) {
-      Vibration.vibrate(duration: 50); // Vibración al marcar/desmarcar favorito
+      Vibration.vibrate(duration: 50); 
     }
     _saveToDisk();
     notifyListeners();
   }
 
-  // Huevo de Pascua: Sacudir para sugerir un outfit aleatorio
   void _initShakeDetection() {
     accelerometerEvents.listen((AccelerometerEvent event) {
       // Si el movimiento es fuerte (sacudida)
