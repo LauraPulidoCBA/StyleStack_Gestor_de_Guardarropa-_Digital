@@ -24,6 +24,7 @@ class WardrobeProvider with ChangeNotifier {
     _initShakeDetection(); // Iniciar el Huevo de Pascua
     //fetchSuggestions(); // Carga la API al iniciar
   }
+  List<Clothing> get favorites => _clothes.where((c) => c.isFavorite).toList();
 
   // Caegar datos de la la Fake Store API
   Future<void> fetchSuggestions() async {
@@ -42,8 +43,15 @@ class WardrobeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addClothing(Clothing item) {
-    _clothes.add(item);
+  void addClothing(  {required String name, required String category, required String image} ) {
+    final newItem = Clothing(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      name: name,
+      category: category,
+      image: image,
+      isFavorite: false,
+    );
+    _clothes.add(newItem);
     _saveToDisk();
     notifyListeners();
   }

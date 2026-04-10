@@ -38,18 +38,9 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
       return;
     }
 
-    // --- TRUCO PARA EL ID SIN UUID ---
-    // Usamos los milisegundos de la hora actual como ID único.
-    final String simpleId = DateTime.now().millisecondsSinceEpoch.toString();
+    // --- TRUCO PARA EL ID SIN UUID --
 
-    final newItem = Clothing(
-      id: simpleId, 
-      name: _nameController.text,
-      category: _selectedCategory,
-      image: _image!.path,
-    );
-
-    context.read<WardrobeProvider>().addClothing(newItem);
+   
     Navigator.pop(context);
   }
 
@@ -126,7 +117,11 @@ class _AddClothingScreenState extends State<AddClothingScreen> {
               height: 50,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
-                onPressed: _saveClothing,
+                onPressed: () => context.read<WardrobeProvider>().addClothing(
+                  image: _image!.path,
+                  name: _nameController.text,
+                  category: _selectedCategory
+                ),
                 child: const Text("GUARDAR", style: TextStyle(color: Colors.white)),
               ),
             ),

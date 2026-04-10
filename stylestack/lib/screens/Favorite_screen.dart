@@ -7,9 +7,9 @@ class Favorite_Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Escuchamos el provider
-    final wardrobeProvider = Provider.of<WardrobeProvider>(context);
+    final wardrobeProvider = context.watch<WardrobeProvider>();
     
-    final favoritos = wardrobeProvider.clothes.where((c) => c.isFavorite).toList();
+    final favoritos = wardrobeProvider.favorites;
 
     return Scaffold(
       body: Container(
@@ -90,7 +90,7 @@ class Favorite_Screen extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.file(
-                      File(item.imagePath), 
+                      File(item.image), 
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
                     ),
