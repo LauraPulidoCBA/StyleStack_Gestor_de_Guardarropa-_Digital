@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OutfitWidget extends StatelessWidget {
+    const OutfitWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -8,7 +9,7 @@ class OutfitWidget extends StatelessWidget {
       color: Colors.black,
       child: Center(
         child: Text(
-          "Outfit sugerido 👕👖",
+          "Outfit sugerido",
           style: TextStyle(color: Colors.white),
         ),
       ),
