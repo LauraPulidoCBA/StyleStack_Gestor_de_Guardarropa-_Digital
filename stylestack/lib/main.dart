@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/wardrobe_provider.dart';
-import 'screens/home_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      return const MaterialApp(
-      home: HomeScreen(),
+      home: MainScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

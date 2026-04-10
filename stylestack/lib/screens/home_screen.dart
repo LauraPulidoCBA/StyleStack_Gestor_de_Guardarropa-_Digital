@@ -165,7 +165,6 @@ class HomeScreen extends StatelessWidget {
       ),
 
       //  MINI PLAYER
-      bottomSheet: const OutfitWidget(),
     );
   }
 }
